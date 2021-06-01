@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'main/style.css' %}"
+    />
+
+    <title>מערך אל-הרס</title>
+  </head>
+  <body dir="rtl">
+    <div class="split header">
+      <div>
+        <a href="/"><strong>מערך אל-הרס</strong></a>
+      </div>
+      <div style="text-align: center">
+        {% if user.is_authenticated %}
+        <p>שלום, {{ user.get_rank_display }} {{ user.full_name }}</p>
+        {% else %}
+        <p><a>היכנס לאתר</a></p>
+        {% endif %}
+      </div>
+      <div style="text-align: left">
+        <a href="/test">רשימת בדיקות</a>
+      </div>
+    </div>
+    <div class="split content">
+      <div class="spacer"></div>
+      <div class="center">{% block content %}{% endblock %}</div>
+    </div>
+  </body>
+</html>

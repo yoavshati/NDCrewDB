@@ -1,0 +1,28 @@
+{% extends "main/base.html" %} {% block content %}
+<table class="content-table">
+  <thead>
+    <tr>
+      <th>שם מלא</th>
+      <th>דרגה</th>
+      <th>מספר אישי</th>
+      <th>חובה/קבע</th>
+      <th>בסיס</th>
+      <th>תאריך הכשרה אחרונה</th>
+      <th>שעות בדיקה</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for person in object_list %}
+    <tr>
+      <td>{{ person.full_name }}</td>
+      <td>{{ person.get_rank_display }}</td>
+      <td>{{ person.personal_number }}</td>
+      <td>{{ person.get_service_type_display }}</td>
+      <td>{{ person.get_base_display }}</td>
+      <td>{{ person.latest_course|date:"j/n/Y" }}</td>
+      <td>{{ person.testing_hours }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
