@@ -1,4 +1,7 @@
-{% extends "main/base.html" %} {% load static %} {% block content %}
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
 <script defer src="{% static 'main/addform.js' %}"></script>
 <div>
   <form autocomplete="off" method="POST">
@@ -100,4 +103,5 @@
     </div>
   </form>
 </div>
+
 {% endblock content %}
