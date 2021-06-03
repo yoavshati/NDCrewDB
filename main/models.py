@@ -20,7 +20,7 @@ class Test(models.Model):
     department = models.IntegerField(choices = DEPARTMENT, verbose_name = 'מחלקה')
     test_location = models.IntegerField(choices = LOCATION, verbose_name = 'מקום ביצוע הבדיקה')
 
-    test_date = models.DateField(verbose_name = 'תאריך ביצוע הבדיקה')
+    test_date = models.DateField(default = timezone.now , verbose_name = 'תאריך ביצוע הבדיקה')
     test_time_start = models.TimeField(verbose_name = 'שעת תחילת הבדיקה')
     test_time_end = models.TimeField(verbose_name = 'שעת סיום הבדיקה')
 

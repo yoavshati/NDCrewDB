@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.models import inlineformset_factory
 from .models import *
 
 class DateInput(forms.DateInput):
@@ -6,13 +7,6 @@ class DateInput(forms.DateInput):
 
 class TimeInput(forms.TimeInput):
     input_type = 'time'
-
-# class PersonnelForm(forms.ModelForm):
-#     class Meta:
-#         model = Personnel
-#         fields = '__all__'
-
-#     latest_course = forms.DateField(widget=forms.widgets.DateInput(attrs={'type':'date'}), label='תאריך קורס אחרון')
 
 class TestForm(forms.ModelForm):
     class Meta:
@@ -23,3 +17,5 @@ class TestForm(forms.ModelForm):
             'test_time_start': TimeInput(),
             'test_time_end': TimeInput(),
         }
+
+ItemFormSet = inlineformset_factory(Test, TestItem, exclude=[])
