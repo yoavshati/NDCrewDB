@@ -18,4 +18,4 @@ class TestForm(forms.ModelForm):
             'test_time_end': TimeInput(),
         }
 
-ItemFormSet = inlineformset_factory(Test, TestItem, exclude=[])
+ItemFormSet = inlineformset_factory(Test, TestItem, exclude=[], extra=1, max_num=4)

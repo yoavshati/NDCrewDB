@@ -18,19 +18,18 @@ class User(AbstractUser):
 
 class Test(models.Model):
     department = models.IntegerField(choices = DEPARTMENT, verbose_name = 'מחלקה')
-    test_location = models.IntegerField(choices = LOCATION, verbose_name = 'מקום ביצוע הבדיקה')
+    test_location = models.IntegerField(choices = LOCATION, verbose_name = 'מקום הבדיקה')
 
-    test_date = models.DateField(default = timezone.now , verbose_name = 'תאריך ביצוע הבדיקה')
-    test_time_start = models.TimeField(verbose_name = 'שעת תחילת הבדיקה')
-    test_time_end = models.TimeField(verbose_name = 'שעת סיום הבדיקה')
+    test_date = models.DateField(default = timezone.now , verbose_name = 'תאריך הבדיקה')
+    test_time_start = models.TimeField(verbose_name = 'שעת התחלה')
+    test_time_end = models.TimeField(verbose_name = 'שעת סיום')
 
-    number_of_parts = models.IntegerField(default = 1, verbose_name = 'מספר פריטים בבדיקה')
     aircraft = models.CharField(max_length = 50, verbose_name = 'כלי טייס/מכלול')
     aircraft_id = models.CharField(max_length = 50, verbose_name = "מס' זנב/סידורי")
-    meter_id = models.CharField(max_length = 16, blank = True, verbose_name = "מס' סידורי של מכשיר הבדיקה")
+    meter_id = models.CharField(blank = True, max_length = 16, verbose_name = "מס' סידורי של מכשיר הבדיקה")
 
-    findings = models.IntegerField(choices = FINDINGS, blank = True, verbose_name = 'ממצאים')
-    notes = models.CharField(max_length = 50, blank = True, verbose_name = 'הערות')
+    findings = models.IntegerField(choices = FINDINGS, verbose_name = 'ממצאים')
+    notes = models.CharField(blank = True, max_length = 50, verbose_name = 'הערות')
 
     tester = models.ForeignKey(
         User,
@@ -67,6 +66,11 @@ class TestItem(models.Model):
     test = models.ForeignKey(Test, on_delete = models.CASCADE)
 
     part_description = models.CharField(max_length = 50, verbose_name = 'תיאור פריט')
+    number_of_parts = models.IntegerField(verbose_name = 'מספר פריטים')
+    item_id = models.CharField(blank = True, max_length = 50, verbose_name = 'מספר סידורי')
+    tag_number = models.CharField(blank = True, max_length = 50, verbose_name = 'מספר תג תהליך')
+
+    # automatically filled using js
     manufacturer_id = models.CharField(max_length = 50, verbose_name = 'מספר יצרן')
     test_method = models.IntegerField(choices = TEST_METHOD, verbose_name = 'שיטת בדיקה')
     literature_code = models.CharField(max_length = 50, verbose_name = 'שיוך לספרות טכנית')

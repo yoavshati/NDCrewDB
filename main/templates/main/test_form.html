@@ -2,38 +2,43 @@
 <script src="{% static 'main/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'main/jquery.formset.js' %}"></script>
 <script type="text/javascript">
-    $(function() {
-        $(".inline.{{ item_form.prefix }}").formset({
-            prefix: "{{ item_form.prefix }}",
-        })
-        $(".inline.{{ item_form.prefix }}").formset({
-            prefix: "{{ item_form.prefix }}",
-        })
-    })
+	$(function () {
+		$(".inline.{{ item_form.prefix }}").formset({
+			prefix: "{{ item_form.prefix }}",
+		});
+	});
 </script>
-<div>
-    <h1>Add Test</h1>
-    <form action="." method="post">
-        {% csrf_token %}
-        <div>
-            {{ form.as_p }}
-        </div>
-        <fieldset>
-            <legend>Test Item</legend>
-            {{ item_form.management_form }}
-            {{ item_form.non_form_errors }}
-            {% for form in item_form %}
-            {{ form.id }}
-                <div class="inline {{ item_form.prefix }}">
-                  {% for field in form %}
-                    {{ field.errors }}
-                    {{ field.label_tag }}
-                    {{ field }}
-                  {% endfor%}
-                </div>
-            {% endfor %}
-        </fieldset>
-        <input type="submit" value="Add recipe" class="submit" />
-    </form>
-</div>
+
+<form action="." method="post">
+	{% csrf_token %}
+	<table>
+		<thead>
+			<tr class="big-text">
+				<th>פרטי הזנה</th>
+				<th>פריטים שנבדקו</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="test-col">
+					<table class="test-table">
+						{{ form.as_table }}
+					</table>
+				</td>
+				<td class="item-col">
+					{{ item_form.management_form }} {{ item_form.non_form_errors }}
+					<!-- ^^ needed to deal with expanding formset ^^ -->
+					{% for form in item_form %}
+					<div class="item-form inline {{ item_form.prefix }}">
+						<table>
+							{{ form.as_table }}
+						</table>
+					</div>
+				</td>
+				{% endfor %}
+			</tr>
+		</tbody>
+	</table>
+	<button type="submit" class="submitbtn" name="submit">שמור תיעוד</button>
+</form>
 {% endblock content %}

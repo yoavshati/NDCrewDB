@@ -1,75 +1,42 @@
 {% extends "main/base.html" %} {% block content %}
-<table class="content-table wide">
-  <thead>
-    <tr>
-      <th>מחלקה</th>
-      <th>תאריך בדיקה</th>
-      <th>מקום ביצוע הבדיקה</th>
-      <th>זיהוי פריט</th>
-      <th>כמות פריטים</th>
-      <th>כלי טיס</th>
-      <th>שיטת בדיקה</th>
-      <th>שיוך לספרות</th>
-      <th>מספר תג בדיקה</th>
-      <th>שם המבצע ושם הבודק</th>
-      <th>שעתון ביצוע</th>
-      <th>ממצאים והערות</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for test in object_list %}
-    <tr>
-      <td>{{ test.get_department_display }}</td>
-      <td>
-        {{ test.test_date|date:"j/n/Y" }}<br />
-        {{ test.test_time_start|time:"H:i" }}<br />
-        {{ test.test_time_end|time:"H:i" }}
-      </td>
-      <td>{{ test.get_test_location_display }}</td>
-      <td>
-        {{ test.part_description }}<br />
-        {{ test.part_id }}
-      </td>
-      <td>{{ test.number_of_parts }}</td>
-      <td>
-        {{ test.aircraft }}<br />
-        {{ test.aircraft_id }}
-      </td>
-      <td>{{ test.get_test_method_display }}</td>
-      <td>{{ test.literature_code }}</td>
-      <td>{{ test.tag_number }}</td>
-      <td>
-        {{ test.tester }}<br />
-        {{ test.checker }}
-      </td>
-      <td>{{ test.testing_hours }}</td>
-      <td>
-        <button class="btn-small" onclick="show('{{ test.id }}')">
-          &#183;&#183;&#183;
-        </button>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% for test in object_list %}
-<div class="modal" id="{{ test.id }}">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <table class="content-table">
-      <thead>
-        <tr>
-          <th>ממצאים</th>
-          <th>הערות</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ test.findings }}</td>
-          <td>{{ test.notes }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="center">
+	<table class="content-table wide">
+		<thead>
+			<tr>
+				<th>מחלקה</th>
+				<th>תאריך בדיקה</th>
+				<th>מקום הבדיקה</th>
+				<th>כלי טיס</th>
+				<th>שם המבצע והבודק</th>
+				<th>ממצאים</th>
+				<th>הערות</th>
+				<th>פריטים</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for test in object_list %}
+			<tr>
+				<td>{{ test.get_department_display }}</td>
+				<td>
+					{{ test.test_date|date:"j/n/Y" }}<br />
+					{{ test.test_time_start|time:"H:i" }}<br />
+					{{ test.test_time_end|time:"H:i" }}
+				</td>
+				<td>{{ test.get_test_location_display }}</td>
+				<td>
+					{{ test.aircraft }}<br /><br />
+					{{ test.aircraft_id }}
+				</td>
+				<td>
+					{{ test.tester }}<br /><br />
+					{{ test.checker }}
+				</td>
+				<td>{{ test.get_findings_display }}</td>
+				<td>{{ test.notes }}</td>
+				<td><a class="add-item small" href="#"></a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
-{% endfor %} {% endblock content %}
+{% endblock content %}
