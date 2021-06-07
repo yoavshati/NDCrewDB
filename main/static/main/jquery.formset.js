@@ -37,38 +37,42 @@
 					row
 						.children(":last")
 						.append(
-							'<a class="' +
+							'<button type="button" class="' +
 								options.deleteCssClass +
-								'" href="javascript:void(0)">' +
+								'">' +
 								options.deleteText +
-								"</a>"
+								"</button>"
 						);
 				} else if (row.is("UL") || row.is("OL")) {
 					// If they're laid out as an ordered/unordered list,
 					// insert an <li> after the last list item:
 					row.append(
-						'<li><a class="' +
+						'<li><button type="button" class="' +
 							options.deleteCssClass +
-							'" href="javascript:void(0)">' +
+							'">' +
 							options.deleteText +
-							"</a></li>"
+							"</button></li>"
 					);
 				} else {
 					// Otherwise, just insert the remove button as the
 					// last child element of the form's container:
 					row.append(
-						'<a class="' +
+						'<button type="button" class="' +
 							options.deleteCssClass +
-							'" href="javascript:void(0)">' +
+							'">' +
 							options.deleteText +
-							"</a>"
+							"</button>"
 					);
 				}
-				row.find("a." + options.deleteCssClass).click(function () {
+				row.find("button." + options.deleteCssClass).click(function () {
 					var row = $(this).parents("." + options.formCssClass),
 						del = row.find('input:hidden[id $= "-DELETE"]'),
 						buttonRow = row.siblings(
-							"a." + options.addCssClass + ", ." + options.formCssClass + "-add"
+							"button." +
+								options.addCssClass +
+								", ." +
+								options.formCssClass +
+								"-add"
 						),
 						forms;
 					row.remove();
@@ -186,11 +190,11 @@
 					buttonRow = $(
 						'<tr><td colspan="' +
 							numCols +
-							'"><a class="' +
+							'"><button type="button" class="' +
 							options.addCssClass +
-							'" href="javascript:void(0)">' +
+							'">' +
 							options.addText +
-							"</a></tr>"
+							"</button></tr>"
 					).addClass(options.formCssClass + "-add");
 				$$.parent().append(buttonRow);
 				if (hideAddButton) buttonRow.hide();
@@ -199,11 +203,11 @@
 				// Otherwise, insert it immediately after the last form:
 
 				$$.filter(":last").after(
-					'<a class="' +
+					'<button type="button" class="' +
 						options.addCssClass +
-						'" href="javascript:void(0)">' +
+						'">' +
 						options.addText +
-						"</a>"
+						"</button>"
 				);
 				addButton = $$.filter(":last").next();
 				if (hideAddButton) addButton.hide();
