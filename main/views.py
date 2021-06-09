@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView
 from django.forms.models import model_to_dict
 from .models import *
 from .forms import TestForm, ItemFormSet
+
+#############
+#   views   #
+#############
 
 def home(request):
     return render(request, 'main/home.html')
@@ -11,29 +15,7 @@ def home(request):
 class TestList(ListView):
     model = Test
 
-class TestDetail(DetailView):
-    model = Test
-
-def add_test(request):
-    test_form = TestForm()
-    formset = ItemFormSet(instance=Test())
-    if request.method == 'POST':
-        test_form = TestForm(request.POST)
-        if test_form.is_valid():
-            created_test = test_form.save(commit=False)
-            formset = ItemFormSet(request.POST, instance=created_test)
-            if formset.is_valid():
-                created_test.save()
-                formset.save()
-                return HttpResponseRedirect('/')
-    
-    if 'submit' in request.POST:
-        return HttpResponseRedirect('/')
-    elif 'add_more' in request.POST:
-        pass # clear changing fields
-
-    return render(request, 'main/test_form.html', {"formset": formset, "test_form": test_form})
-
+# creates test and related parts
 class TestCreateView(CreateView):
     template_name = 'main/test_form.html'
     model = Test
@@ -84,17 +66,13 @@ class TestCreateView(CreateView):
         """
         return self.render_to_response(self.get_context_data(form=form,item_form=item_form))
 
+###########
+#   API   #
+###########
+
 def get_items(request):
     item_list = list(ReferanceItem.objects.values_list('part_description', flat=True).order_by('part_description'))
     return JsonResponse({'item_list': item_list})
-
 def get_item(request, name):
     item = model_to_dict(ReferanceItem.objects.get(part_description__iexact=name))
     return JsonResponse(item)
-
-class TestUpdate(UpdateView):
-    model = Test
-    fields = '__all__'
-
-class TestDelete(DeleteView):
-    model = Test

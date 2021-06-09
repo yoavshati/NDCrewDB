@@ -1,42 +1,69 @@
 {% extends "main/base.html" %} {% block content %}
-<div class="center">
-	<table class="content-table">
-		<thead>
-			<tr>
-				<th>מחלקה</th>
-				<th>תאריך בדיקה</th>
-				<th>מקום הבדיקה</th>
-				<th>כלי טיס</th>
-				<th>שם המבצע והבודק</th>
-				<th>ממצאים</th>
-				<th>הערות</th>
-				<th>פריטים</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for test in object_list %}
-			<tr>
-				<td>{{ test.get_department_display }}</td>
-				<td>
-					{{ test.test_date|date:"j/n/Y" }}<br />
-					{{ test.test_time_start|time:"H:i" }}<br />
-					{{ test.test_time_end|time:"H:i" }}
-				</td>
-				<td>{{ test.get_test_location_display }}</td>
-				<td>
-					{{ test.aircraft }}<br /><br />
-					{{ test.aircraft_id }}
-				</td>
-				<td>
-					{{ test.tester }}<br /><br />
-					{{ test.checker }}
-				</td>
-				<td>{{ test.get_findings_display }}</td>
-				<td>{{ test.notes }}</td>
-				<td><a class="add-item small" href="#"></a></td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-</div>
+<table class="content-table table-rows">
+	<thead>
+		<tr>
+			<th>שיוך ארגוני</th>
+			<th>תאריך בדיקה</th>
+			<th>מקום הבדיקה</th>
+			<th>כלי טיס</th>
+			<th>שם המבצע</th>
+			<th>שם הבודק</th>
+			<th>ממצאים</th>
+			<th>הערות</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for test in object_list %}
+		<tr>
+			<td>{{ test.get_department_display }}</td>
+			<td>
+				{{ test.test_date|date:"j/n/Y" }}<br />
+				{{ test.test_time_start|time:"H:i" }}<br />
+				{{ test.test_time_end|time:"H:i" }}
+			</td>
+			<td>{{ test.get_test_location_display }}</td>
+			<td>
+				{{ test.aircraft }}<br /><br />
+				{{ test.aircraft_id }}
+			</td>
+			<td>{{ test.tester }}</td>
+			<td>{{ test.checker }}</td>
+			<td>{{ test.get_findings_display }}</td>
+			<td>{{ test.notes }}</td>
+		</tr>
+		<tr>
+			<td colspan="8">
+				<table class="content-table alt-rows small">
+					<thead>
+						<tr>
+							<th>תיאור פריט</th>
+							<th>מספר פריטים</th>
+							<th>מספר סידורי</th>
+							<th>מספר תג תהליך</th>
+							<th>מספר יצרן</th>
+							<th>שיטת בדיקה</th>
+							<th>שיוך לספרות טכנית</th>
+							<th>שעתון בדיקה</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in test.items.all %}
+						<tr>
+							<td>{{ item.part_description }}</td>
+							<td>{{ item.number_of_parts }}</td>
+							<td>{{ item.item_id }}</td>
+							<td>{{ item.tag_number }}</td>
+							<td>{{ item.manufacturer_id }}</td>
+							<td>{{ item.get_test_method_display }}</td>
+							<td>{{ item.literature_code }}</td>
+							<td>{{ item.testing_hours }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
 {% endblock content %}

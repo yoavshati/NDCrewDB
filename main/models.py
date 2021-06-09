@@ -17,7 +17,7 @@ class User(AbstractUser):
         return str(self.full_name)
 
 class Test(models.Model):
-    department = models.IntegerField(choices = DEPARTMENT, verbose_name = 'מחלקה')
+    department = models.IntegerField(choices = DEPARTMENT, verbose_name = 'שיוך ארגוני')
     test_location = models.IntegerField(choices = LOCATION, verbose_name = 'מקום הבדיקה')
 
     test_date = models.DateField(default = timezone.now , verbose_name = 'תאריך הבדיקה')
@@ -33,6 +33,7 @@ class Test(models.Model):
 
     tester = models.ForeignKey(
         User,
+        blank = True,
         on_delete = models.PROTECT,
         related_name = "tester",
         related_query_name = "tester",
@@ -63,7 +64,7 @@ class ReferanceItem(models.Model):
 # allows user to save multiple items
 # allows admins to modify specific items
 class TestItem(models.Model):
-    test = models.ForeignKey(Test, on_delete = models.CASCADE)
+    test = models.ForeignKey(Test, on_delete = models.CASCADE, related_name = 'items')
 
     part_description = models.CharField(max_length = 50, verbose_name = 'תיאור פריט')
     number_of_parts = models.IntegerField(verbose_name = 'מספר פריטים')
