@@ -34,6 +34,7 @@ class Test(models.Model):
     tester = models.ForeignKey(
         User,
         blank = True,
+        null = True,
         on_delete = models.PROTECT,
         related_name = "tester",
         related_query_name = "tester",
@@ -51,7 +52,7 @@ class Test(models.Model):
         return self.tester.full_name + ', ' + str(self.test_date)
 
 # saves item types for automatic field filling
-class ReferanceItem(models.Model):
+class ReferenceItem(models.Model):
     part_description = models.CharField(max_length = 50, verbose_name = 'תיאור פריט')
     manufacturer_id = models.CharField(max_length = 50, verbose_name = 'מספר יצרן')
     test_method = models.IntegerField(choices = TEST_METHOD, verbose_name = 'שיטת בדיקה')
