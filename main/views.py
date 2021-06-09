@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.forms.models import model_to_dict
 from .models import *
 from .forms import TestForm, ItemFormSet
@@ -12,7 +12,7 @@ from .forms import TestForm, ItemFormSet
 def home(request):
     return render(request, 'main/home.html')
 
-class TestList(ListView):
+class TestListView(ListView):
     model = Test
 
 # creates test and related parts
@@ -66,6 +66,20 @@ class TestCreateView(CreateView):
         """
         return self.render_to_response(self.get_context_data(form=form,item_form=item_form))
 
+# REFERENCE ITEM
+class ItemCreateView(CreateView):
+    model = ReferenceItem
+    fields = '__all__'
+class ItemUpdateView(UpdateView):
+    model = ReferenceItem
+    fields = '__all__'
+class ItemDeleteView(DeleteView):
+    model = ReferenceItem
+    fields = '__all__'
+class ItemListView(ListView):
+    model = ReferenceItem
+    fields = '__all__'
+
 ###########
 #   API   #
 ###########
@@ -73,6 +87,7 @@ class TestCreateView(CreateView):
 def get_items(request):
     item_list = list(ReferanceItem.objects.values_list('part_description', flat=True).order_by('part_description'))
     return JsonResponse({'item_list': item_list})
+
 def get_item(request, name):
     item = model_to_dict(ReferanceItem.objects.get(part_description__iexact=name))
     return JsonResponse(item)

@@ -11,4 +11,4 @@ class TestAdmin(admin.ModelAdmin):
 
 admin.site.register(User)
 admin.site.register(Test, TestAdmin)
-admin.site.register(ReferanceItem)
+admin.site.register(ReferenceItem)

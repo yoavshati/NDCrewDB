@@ -2,12 +2,12 @@ from django import forms
 from django.forms.models import inlineformset_factory
 from .models import *
 
+
+# TEST
 class DateInput(forms.DateInput):
     input_type = 'date'
-
 class TimeInput(forms.TimeInput):
     input_type = 'time'
-
 class TestForm(forms.ModelForm):
     class Meta:
         model = Test
@@ -17,5 +17,10 @@ class TestForm(forms.ModelForm):
             'test_time_start': TimeInput(),
             'test_time_end': TimeInput(),
         }
-
+# TEST ITEM - inline
 ItemFormSet = inlineformset_factory(Test, TestItem, exclude=[], extra=0, min_num=1)
+
+# REFERANCE ITEM
+class ReferenceItemForm(forms.ModelForm):
+    model = ReferenceItem
+    fields = '__all__'
