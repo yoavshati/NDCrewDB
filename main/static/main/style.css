@@ -65,6 +65,7 @@ p {
 	margin: 0;
 }
 .add-item,
+.update-item,
 .delete-item {
 	display: inline-block;
 	position: relative;
@@ -83,12 +84,14 @@ p {
 	margin-right: auto;
 	margin-left: auto;
 }
+.update-item,
 .delete-item {
 	font-size: 1.5rem;
 }
 /* centered + and - signs */
 .add-item::before,
 .add-item::after,
+.update-item::before,
 .delete-item::before {
 	content: "";
 	position: absolute;
@@ -104,8 +107,9 @@ p {
 .add-item::after {
 	transform: rotate(90deg);
 }
-.small {
-	font-size: 2.5rem;
+.update-item::before {
+	clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 50%);
+	transform: rotate(-45deg);
 }
 
 /* ========
@@ -116,6 +120,9 @@ p {
 }
 .small {
 	font-size: 0.85rem;
+}
+.big {
+	font-size: 2rem;
 }
 
 /* ============

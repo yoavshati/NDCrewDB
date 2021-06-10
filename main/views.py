@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.forms.models import model_to_dict
@@ -68,12 +69,15 @@ class TestCreateView(CreateView):
 
 # REFERENCE ITEM
 class ItemCreateView(CreateView):
+    success_url = '/item/'
     model = ReferenceItem
     fields = '__all__'
 class ItemUpdateView(UpdateView):
+    success_url = '/item/'
     model = ReferenceItem
     fields = '__all__'
 class ItemDeleteView(DeleteView):
+    success_url = '/item/'
     model = ReferenceItem
     fields = '__all__'
 class ItemListView(ListView):
