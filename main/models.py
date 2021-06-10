@@ -25,7 +25,7 @@ class Test(models.Model):
 
     aircraft = models.CharField(max_length = 50, verbose_name = 'כלי טייס/מכלול')
     aircraft_id = models.CharField(max_length = 50, verbose_name = "מס' זנב/סידורי")
-    meter_id = models.CharField(blank = True, max_length = 16, verbose_name = "מס' סידורי של מכשיר הבדיקה")
+    measurement_device_id = models.CharField(blank = True, max_length = 16, verbose_name = "מס' סידורי של מכשיר הבדיקה")
 
     findings = models.IntegerField(choices = FINDINGS, verbose_name = 'ממצאים')
     notes = models.CharField(blank = True, max_length = 50, verbose_name = 'הערות')
