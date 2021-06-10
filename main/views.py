@@ -89,9 +89,9 @@ class ItemListView(ListView):
 ###########
 
 def get_items(request):
-    item_list = list(ReferanceItem.objects.values_list('part_description', flat=True).order_by('part_description'))
+    item_list = list(ReferenceItem.objects.values_list('part_description', flat=True).order_by('part_description'))
     return JsonResponse({'item_list': item_list})
 
 def get_item(request, name):
-    item = model_to_dict(ReferanceItem.objects.get(part_description__iexact=name))
+    item = model_to_dict(ReferenceItem.objects.get(part_description__iexact=name))
     return JsonResponse(item)
