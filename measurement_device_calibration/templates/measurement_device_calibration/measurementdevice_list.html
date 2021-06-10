@@ -1,0 +1,35 @@
+{% extends "main/base.html" %} {% block content %}
+<table class="content-table alt-rows">
+	<thead>
+		<tr>
+			<th>תיאור פריט</th>
+			<th>מספר יצרן</th>
+			<th>שיטת בדיקה</th>
+			<th>שיוך לספרות טכנית</th>
+			<th>שעתון בדיקה</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for measurement_device in object_list %}
+		<tr>
+			<td>{{ measurement_device.part_description }}</td>
+			<td>{{ measurement_device.manufacturer_id }}</td>
+			<td>{{ measurement_device.get_test_method_display }}</td>
+			<td>{{ measurement_device.literature_code }}</td>
+			<td>{{ measurement_device.testing_hours }}</td>
+			<td>
+				<a
+					class="delete-item big"
+					href="{% url 'md-delete' measurement_device.id %}"
+				></a>
+				<a
+					class="update-item big"
+					href="{% url 'md-update' measurement_device.id %}"
+				></a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}

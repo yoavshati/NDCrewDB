@@ -1,0 +1,9 @@
+{% extends "main/base.html" %} {% block content %}
+<form action="." method="post">
+	{% csrf_token %}
+	<table class="test-table center">
+		{{ form.as_table }}
+	</table>
+	<button type="submit" class="button" name="submit">שמור מכשיר מדידה</button>
+</form>
+{% endblock content %}
