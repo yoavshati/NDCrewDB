@@ -8,13 +8,12 @@ from .choices import *
 # adds fields to default user
 # lets admins track work hours
 class User(AbstractUser):
-    full_name = models.CharField(default = '-', max_length = 50)
-    personal_number = models.CharField(blank = True, max_length = 7, validators = [RegexValidator(regex = r'\d{7}')])
-    level = models.IntegerField(default = 1, choices = LEVEL)
-
+    username = models.CharField(max_length = 8, unique = True, validators = [RegexValidator(regex = r's\d{7}')])
+    first_name = models.CharField(max_length = 50, blank = False)
+    last_name = models.CharField(max_length = 50, blank = False)
 
     def __str__(self):
-        return str(self.full_name)
+        return self.first_name + ' ' + self.last_name
 
 class Test(models.Model):
     department = models.IntegerField(choices = DEPARTMENT, verbose_name = 'שיוך ארגוני')
