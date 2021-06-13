@@ -26,7 +26,7 @@
 				{{ test.aircraft }}<br /><br />
 				{{ test.aircraft_id }}
 			</td>
-			<td>{{ test.tester }}</td>
+			<td>{% if test.tester %}{{ test.tester }}{% endif %}</td>
 			<td>{{ test.checker }}</td>
 			<td>{{ test.get_findings_display }}</td>
 			<td>{{ test.notes }}</td>
@@ -66,4 +66,8 @@
 		{% endfor %}
 	</tbody>
 </table>
+<footer class="split">
+	<h2>חפש בדיקה</h2>
+	<div>{{ test_form.as_p }}{{ item_form.as_p }}</div>
+</footer>
 {% endblock content %}

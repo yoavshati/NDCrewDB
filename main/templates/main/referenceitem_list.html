@@ -19,8 +19,8 @@
 			<td>{{ item.literature_code }}</td>
 			<td>{{ item.testing_hours }}</td>
 			<td>
-				<a class="delete-item big" href="delete/{{item.id}}"></a>
-				<a class="update-item big" href="update/{{item.id}}"></a>
+				<a class="delete-item big" href="{% url 'item-delete' item.id %}"></a>
+				<a class="update-item big" href="{% url 'item-update' item.id %}"></a>
 			</td>
 		</tr>
 		{% endfor %}

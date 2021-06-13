@@ -15,24 +15,28 @@
 		<title>מערך אל-הרס</title>
 	</head>
 	<body dir="rtl">
-		<div class="split header" id="navbar">
+		<header class="split">
 			<div>
 				<a href="/"><strong>מערך אל-הרס</strong></a>
 			</div>
 			<div style="text-align: center">
 				{% if user.is_authenticated %}
-				<p>שלום, {{ user.get_rank_display }} {{ user.full_name }}</p>
+				<p>שלום, {{ user }}</p>
 				{% else %}
 				<span><a>היכנס לאתר</a></span>
 				{% endif %}
 			</div>
-			<div style="text-align: left">
-				<a href="/test">רשימת בדיקות</a>
-			</div>
-		</div>
-		<div class="split content">
-			<div class="spacer" id="spacer"></div>
+			<nav>
+				<ul>
+					<li><a href="/test">רשימת בדיקות</a></li>
+					<li><a href="/item">רשימת פריטים</a></li>
+					<li><a href="/measure">רשימת מכשירי מדידה</a></li>
+				</ul>
+			</nav>
+		</header>
+		<section class="split content">
+			<div class="spacer"></div>
 			{% block content %}{% endblock %}
-		</div>
+		</section>
 	</body>
 </html>
