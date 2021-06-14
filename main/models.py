@@ -8,11 +8,12 @@ from .choices import *
 # lets admins track work hours
 class User(AbstractUser):
     username = models.CharField(max_length = 8, unique = True, validators = [RegexValidator(regex = r's\d{7}')])
+    password = models.CharField(max_length = 200, default = 'aA12345678')
     first_name = models.CharField(max_length = 50, blank = False)
     last_name = models.CharField(max_length = 50, blank = False)
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.get_full_name()
 
 class Test(models.Model):
     department = models.IntegerField(choices = DEPARTMENT, verbose_name = 'שיוך ארגוני')
