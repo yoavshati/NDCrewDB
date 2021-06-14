@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
-    'measurement device calibration',
+    'measurement_device_calibration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
