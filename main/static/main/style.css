@@ -94,6 +94,7 @@ body {
 }
 header {
 	height: 10%;
+	z-index: 1;
 	color: var(--text-color);
 	background-color: var(--main-color);
 	display: flex;
@@ -104,6 +105,7 @@ header div {
 	font-size: 1.5rem;
 }
 section {
+	--main-color: #003583;
 	text-align: center;
 	overflow-y: auto;
 }
@@ -285,6 +287,9 @@ h2 {
 }
 .content-table tbody tr:last-of-type {
 	border-bottom: 0.125em solid var(--main-color);
+}
+table table {
+	--main-color: #0060a3;
 }
 .alt-rows tbody tr:nth-of-type(even) {
 	background-color: #f3f3f3;
