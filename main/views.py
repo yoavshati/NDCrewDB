@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.forms.models import model_to_dict
 from .models import *
 from .forms import TestForm, ItemFormSet
+from .filters import *
 
 #############
 #   views   #
@@ -14,6 +15,18 @@ def home(request):
 
 class TestListView(ListView):
     model = Test
+
+def test_list(request):
+    items = TestItem.objects.all()
+    item_filter = ItemFilter(request.GET, queryset = items)
+    test_list = Test.objects.filter(id__in=item_filter.qs.distinct().values_list('id', flat = True))
+    test_filter = TestFilter(request.GET, queryset = test_list)
+    test_list = test_filter.qs
+    return render(request, 'main/test_list.html', {
+        'object_list': test_list,
+        'test_filter': test_filter,
+        'item_filter': item_filter
+    })
 
 # creates test and related parts
 class TestCreateView(CreateView):

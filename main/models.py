@@ -47,7 +47,7 @@ class Test(models.Model):
     )
     
     def __str__(self):
-        return self.tester.full_name + ', ' + str(self.test_date)
+        return str(self.tester) + ', ' + str(self.test_date)
 
 # saves item types for automatic field filling
 class ReferenceItem(models.Model):

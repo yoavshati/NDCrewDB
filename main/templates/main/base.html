@@ -15,7 +15,7 @@
 		<title>מערך אל-הרס</title>
 	</head>
 	<body dir="rtl">
-		<header class="split">
+		<header>
 			<div>
 				<a href="/"><strong>מערך אל-הרס</strong></a>
 			</div>
@@ -34,9 +34,7 @@
 				</ul>
 			</nav>
 		</header>
-		<section class="split content">
-			<div class="spacer"></div>
-			{% block content %}{% endblock %}
-		</section>
+		<section>{% block content %}{% endblock %}</section>
+		<footer>{% block footer %}{% endblock %}</footer>
 	</body>
 </html>

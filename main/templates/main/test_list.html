@@ -3,9 +3,9 @@
 	<thead>
 		<tr>
 			<th>שיוך ארגוני</th>
+			<th>כלי טיס</th>
 			<th>תאריך בדיקה</th>
 			<th>מקום הבדיקה</th>
-			<th>כלי טיס</th>
 			<th>שם המבצע</th>
 			<th>שם הבודק</th>
 			<th>ממצאים</th>
@@ -17,15 +17,15 @@
 		<tr>
 			<td>{{ test.get_department_display }}</td>
 			<td>
+				{{ test.aircraft }}<br /><br />
+				{{ test.aircraft_id }}
+			</td>
+			<td>
 				{{ test.test_date|date:"j/n/Y" }}<br />
 				{{ test.test_time_start|time:"H:i" }}<br />
 				{{ test.test_time_end|time:"H:i" }}
 			</td>
 			<td>{{ test.get_test_location_display }}</td>
-			<td>
-				{{ test.aircraft }}<br /><br />
-				{{ test.aircraft_id }}
-			</td>
 			<td>{% if test.tester %}{{ test.tester }}{% endif %}</td>
 			<td>{{ test.checker }}</td>
 			<td>{{ test.get_findings_display }}</td>
@@ -66,8 +66,18 @@
 		{% endfor %}
 	</tbody>
 </table>
-<footer class="split">
+<div class="spacer"></div>
+{% endblock %} {% block footer %}
+<div class="fixed search">
 	<h2>חפש בדיקה</h2>
-	<div>{{ test_form.as_p }}{{ item_form.as_p }}</div>
-</footer>
-{% endblock content %}
+	<form method="GET">
+		<table>
+			{{ test_filter.form.as_table }}
+		</table>
+		<table>
+			{{ item_filter.form.as_table }}
+		</table>
+		<button class="center">חפש</button>
+	</form>
+</div>
+{% endblock %}
