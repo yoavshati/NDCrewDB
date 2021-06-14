@@ -12,7 +12,7 @@
 	--accent-color: #edd3c4;
 	--light-color: #649cfc;
 	--secondary-color: #6f686d;
-	--glass: #f0f0f09d;
+	--glass: #ffffffb4;
 
 	--text-color: white;
 }
@@ -123,6 +123,7 @@ section::-webkit-scrollbar {
 	background-color: var(--glass);
 	backdrop-filter: blur(15px);
 	border-radius: 2em 2em 0 0;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	text-align: center;
 	transform: translateY(86%);
 	transition: transform 250ms;
