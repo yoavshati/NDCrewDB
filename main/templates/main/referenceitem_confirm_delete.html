@@ -1,5 +1,5 @@
 {% extends "main/base.html" %} {% block content %}
-<form action="." method="post">
+<form method="post">
 	{% csrf_token %}
 	<button type="submit" class="button" name="submit">מחק פריט</button>
 </form>

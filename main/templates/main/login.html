@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}{% load static %}{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<div class="container">
+		<h2>פרטי הזנה</h2>
+		<table class="test-table">
+			{{ form.as_table }}
+		</table>
+	</div>
+	<button type="submit" class="button" name="submit">שמור תיעוד</button>
+</form>
+{% endblock %}

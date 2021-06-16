@@ -104,6 +104,7 @@ header div {
 }
 section {
 	flex: 1;
+	padding: 1em;
 	--main-color: #003583;
 	text-align: center;
 	overflow-y: auto;
@@ -262,7 +263,7 @@ h2 {
 }
 .content-table {
 	border-collapse: collapse;
-	margin: 2vh auto;
+	margin: 0 auto;
 	min-width: 10%;
 	border-radius: 0.3em 0.3em 0 0;
 	overflow: hidden;
@@ -298,5 +299,14 @@ table table {
 	padding-block: 0;
 }
 .content-table tbody tr:last-of-type {
+	border-bottom: 0.125em solid var(--main-color);
+}
+
+/* card */
+.card {
+	border-radius: 0.3em 0.3em 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 1.3em rgba(0, 0, 0, 0.15);
+	padding: 0.65em 0.8em;
 	border-bottom: 0.125em solid var(--main-color);
 }

@@ -1,0 +1,70 @@
+{% extends "main/base.html" %} {% block content %}
+
+<form method="post">
+	{% csrf_token %}
+	<div class="container">
+		<div style="flex: 1">
+			<h2>פרטים אישיים</h2>
+			<table class="card">
+				<tr>
+					<th>שם משתמש <small>(s+מ"א)</small></th>
+					<td>{{ form.username }}</td>
+				</tr>
+				<tr>
+					<th>סיסמא</th>
+					<td>{{ form.password }}</td>
+				</tr>
+				<tr>
+					<th>שם פרטי</th>
+					<td>{{ form.first_name }}</td>
+				</tr>
+				<tr>
+					<th>שם משפחה</th>
+					<td>{{ form.last_name }}</td>
+				</tr>
+				<tr>
+					<th>שיוך ארגוני</th>
+					<td>{{ form.department }}</td>
+				</tr>
+				<tr>
+					<th>הרשאה</th>
+					<td>{{ form.groups }}</td>
+				</tr>
+			</table>
+		</div>
+		<div style="flex: 2">
+			<h2>רמת הסמכה</h2>
+			<table class="content-table double-rows">
+				<tbody>
+					<tr>
+						<th>PT</th>
+						<td>{{ form.PT_level }}</td>
+						<th>MT</th>
+						<td>{{ form.MT_level }}</td>
+						<th>EC</th>
+						<td>{{ form.EC_level }}</td>
+						<th>UT</th>
+						<td>{{ form.UT_level }}</td>
+						<th>RT</th>
+						<td>{{ form.RT_level }}</td>
+					</tr>
+					<tr>
+						<th>ראיה</th>
+						<td>{{ form.visual_level }}</td>
+						<th>הקשה</th>
+						<td>{{ form.tap_level }}</td>
+						<th>PAUT</th>
+						<td>{{ form.PAUT_level }}</td>
+						<th>LST</th>
+						<td>{{ form.LST_level }}</td>
+						<th>IRT</th>
+						<td>{{ form.IRT_level }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<button type="submit" class="button" name="save">צור משתמש</button>
+	<button type="submit" class="button" name="add_more">צור משתמש נוסף</button>
+</form>
+{% endblock %}

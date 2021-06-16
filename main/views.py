@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.forms.models import model_to_dict
 from .models import *
-from .forms import TestForm, ItemFormSet
+from .forms import TestForm, ItemFormSet, UserForm
 from .filters import *
 
 #############
@@ -97,11 +97,21 @@ class ItemListView(ListView):
 
 # USER
 def tech_list(request):
-    technicians = User.objects.filter(groups__name = 'technician')
+    technicians = User.objects.filter(groups__name = 'טכנאי')
     # filter again so supervisors can only see their own technicians
-    if request.user.groups.all()[0].name == 'supervisor':
+    if request.user.groups.name == 'מ"ע':
         technicians = technicians.filter(department = request.user.department)
     return render(request, 'main/technician_list.html', {'object_list': technicians})
+
+def user_register(request):
+    form = UserForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        if 'save' in request.POST:
+            return HttpResponseRedirect('/tech')
+        elif 'add_more' in request.POST:
+            return HttpResponseRedirect('/tech/new')
+    return render(request, 'main/user_form.html', {'form': form})
 
 ###########
 #   API   #
