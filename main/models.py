@@ -10,7 +10,19 @@ class User(AbstractUser):
     username = models.CharField(max_length = 8, unique = True, validators = [RegexValidator(regex = r's\d{7}')])
     password = models.CharField(max_length = 200, default = 'aA12345678')
     first_name = models.CharField(max_length = 50, blank = False)
-    last_name = models.CharField(max_length = 50, blank = False)
+
+    department = models.IntegerField(choices = DEPARTMENT)
+
+    PT_level = models.IntegerField(default = 2, choices = LEVEL)
+    MT_level = models.IntegerField(default = 2, choices = LEVEL)
+    EC_level = models.IntegerField(default = 2, choices = LEVEL)
+    UT_level = models.IntegerField(default = 2, choices = LEVEL)
+    RT_level = models.IntegerField(default = 2, choices = LEVEL)
+    visual_level = models.IntegerField(default = 2, choices = LEVEL)
+    tap_level = models.IntegerField(default = 2, choices = LEVEL)
+    PAUT_level = models.IntegerField(default = 2, choices = LEVEL)
+    LST_level = models.IntegerField(default = 2, choices = LEVEL)
+    IRT_level = models.IntegerField(default = 2, choices = LEVEL)
 
     def __str__(self):
         return self.get_full_name()

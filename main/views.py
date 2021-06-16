@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -91,10 +92,16 @@ class ItemUpdateView(UpdateView):
 class ItemDeleteView(DeleteView):
     success_url = '/item/'
     model = ReferenceItem
-    fields = '__all__'
 class ItemListView(ListView):
     model = ReferenceItem
-    fields = '__all__'
+
+# USER
+def tech_list(request):
+    technicians = User.objects.filter(groups__name = 'technician')
+    # filter again so supervisors can only see their own technicians
+    if request.user.groups.all()[0].name == 'supervisor':
+        technicians = technicians.filter(department = request.user.department)
+    return render(request, 'main/technician_list.html', {'object_list': technicians})
 
 ###########
 #   API   #

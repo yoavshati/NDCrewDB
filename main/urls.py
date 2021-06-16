@@ -11,6 +11,7 @@ urlpatterns = [
     path('item/new/', ItemCreateView.as_view(), name='item-create'),
     path('item/update/<int:pk>/', ItemUpdateView.as_view(), name='item-update'),
     path('item/delete/<int:pk>/', ItemDeleteView.as_view(), name='item-delete'),
+    path('tech/', tech_list, name='tech-list'),
     # API
     path('getitems/', get_items, name='item-list-api'),
     path('getitem/<str:name>/', get_item, name='item-api')

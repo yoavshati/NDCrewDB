@@ -23,7 +23,7 @@
 				{% if user.is_authenticated %}
 				<p>שלום, {{ user }}</p>
 				{% else %}
-				<span><a>היכנס לאתר</a></span>
+				<span><a href="#no-login-yet">היכנס לאתר</a></span>
 				{% endif %}
 			</div>
 			<nav>
@@ -31,8 +31,8 @@
 					<li><a href="/test">רשימת בדיקות</a></li>
 					<li><a href="/item">רשימת פריטים</a></li>
 					<li><a href="/measure">רשימת מכשירי מדידה</a></li>
-					<li><a href="">רשימת טכנאים</a></li>
-					<li><a href="">שנה סיסמא</a></li>
+					<li><a href="/tech">רשימת טכנאים</a></li>
+					<li><a href="#not-implemented">שנה סיסמא</a></li>
 				</ul>
 			</nav>
 		</header>
