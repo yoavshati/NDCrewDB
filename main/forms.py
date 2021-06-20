@@ -41,6 +41,9 @@ class UserForm(ModelForm):
             'IRT_level'
         ]
 
+class PasswordForm(forms.Form):
+    new_password = forms.CharField(min_length = 6, max_length = 20, label = 'סיסמה חדשה')
+
 # REFERANCE ITEM
 class ReferenceItemForm(forms.ModelForm):
     model = ReferenceItem

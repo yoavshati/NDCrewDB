@@ -1,10 +1,10 @@
-from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.forms.models import model_to_dict
 from .models import *
-from .forms import TestForm, ItemFormSet, UserForm
+from .forms import TestForm, ItemFormSet, UserForm, PasswordForm
 from .filters import *
 
 #############
@@ -117,6 +117,16 @@ def user_register(request):
         elif 'add_more' in request.POST:
             return HttpResponseRedirect('/tech/new')
     return render(request, 'main/user_form.html', {'form': form})
+
+@login_required
+def change_password(request):
+    form = PasswordForm(request.POST or None)
+    if form.is_valid():
+        user = request.user
+        user.set_password(form.cleaned_data['new_password'])
+        user.save()
+        return HttpResponseRedirect('/')
+    return render(request, 'main/change_password.html', {'form': form})
 
 ###########
 #   API   #

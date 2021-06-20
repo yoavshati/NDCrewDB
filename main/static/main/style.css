@@ -356,7 +356,8 @@ table table {
 .card {
 	border-radius: 0.3em 0.3em 0 0;
 	overflow: hidden;
+	width: max-content;
 	box-shadow: 0 0 1.3em rgba(0, 0, 0, 0.15);
-	padding: 0.65em 0.8em;
+	padding: 0.65em 0.8em 1em;
 	border-bottom: 0.125em solid var(--main-color);
 }
