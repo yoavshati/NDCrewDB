@@ -1,5 +1,5 @@
 from django import forms
-from django.forms.models import inlineformset_factory
+from django.forms.models import ModelForm, inlineformset_factory
 from .models import *
 
 
@@ -20,12 +20,11 @@ class TestForm(forms.ModelForm):
 # TEST ITEM - inline
 ItemFormSet = inlineformset_factory(Test, TestItem, exclude=[], extra=0, min_num=1)
 
-class UserForm(forms.ModelForm):
+class UserForm(ModelForm):
     class Meta:
         model = User
         fields = [
             'username',
-            'password',
             'groups',
             'first_name',
             'last_name',

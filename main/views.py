@@ -103,6 +103,11 @@ def tech_list(request):
         technicians = technicians.filter(department = request.user.department)
     return render(request, 'main/technician_list.html', {'object_list': technicians})
 
+def tech_detail(request, id):
+    tech = User.objects.get(id=id)
+    context = {'tech': tech}
+    return render(request, '', context)
+
 def user_register(request):
     form = UserForm(request.POST or None)
     if form.is_valid():

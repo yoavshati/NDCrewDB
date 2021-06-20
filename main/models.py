@@ -1,5 +1,6 @@
+from django.contrib.auth.hashers import make_password
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.core.validators import RegexValidator
 from django.utils import timezone
 from .choices import *
@@ -8,7 +9,7 @@ from .choices import *
 # lets admins track work hours
 class User(AbstractUser):
     username = models.CharField(max_length = 8, unique = True, validators = [RegexValidator(regex = r's\d{7}')])
-    password = models.CharField(max_length = 200, default = 'aA12345678')
+    password = models.CharField(max_length = 200, default = make_password('aA12345678'))
     first_name = models.CharField(max_length = 50, blank = False)
 
     department = models.IntegerField(choices = DEPARTMENT)
@@ -23,6 +24,8 @@ class User(AbstractUser):
     PAUT_level = models.IntegerField(default = 2, choices = LEVEL)
     LST_level = models.IntegerField(default = 2, choices = LEVEL)
     IRT_level = models.IntegerField(default = 2, choices = LEVEL)
+
+    groups = models.ForeignKey(Group, default = 1, on_delete = models.PROTECT)
 
     def __str__(self):
         return self.get_full_name()

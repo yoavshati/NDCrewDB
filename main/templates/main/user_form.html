@@ -1,18 +1,13 @@
 {% extends "main/base.html" %} {% block content %}
-
 <form method="post">
 	{% csrf_token %}
 	<div class="container">
 		<div style="flex: 1">
 			<h2>פרטים אישיים</h2>
-			<table class="card">
+			<table class="center card">
 				<tr>
 					<th>שם משתמש <small>(s+מ"א)</small></th>
 					<td>{{ form.username }}</td>
-				</tr>
-				<tr>
-					<th>סיסמא</th>
-					<td>{{ form.password }}</td>
 				</tr>
 				<tr>
 					<th>שם פרטי</th>
@@ -29,6 +24,9 @@
 				<tr>
 					<th>הרשאה</th>
 					<td>{{ form.groups }}</td>
+				</tr>
+				<tr>
+					<td>{{form.errors}}</td>
 				</tr>
 			</table>
 		</div>
@@ -64,6 +62,7 @@
 			</table>
 		</div>
 	</div>
+	<div style="display: none">{{ form.password }}</div>
 	<button type="submit" class="button" name="save">צור משתמש</button>
 	<button type="submit" class="button" name="add_more">צור משתמש נוסף</button>
 </form>
