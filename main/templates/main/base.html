@@ -17,7 +17,7 @@
 	<body dir="rtl">
 		<header>
 			<div>
-				<a href="/"><strong>מערך אל-הרס</strong></a>
+				<a href="/" tabindex="-1"><strong>מערך אל-הרס</strong></a>
 			</div>
 			<div style="text-align: center">
 				{% if user.is_authenticated %}
@@ -26,15 +26,18 @@
 				<span><a href="/login">היכנס לאתר</a></span>
 				{% endif %}
 			</div>
-			<nav>
-				<ul>
-					<li><a href="/test">בדיקות</a></li>
-					<li><a href="/item">פריטים</a></li>
-					<li><a href="/measure">מכשירי מדידה</a></li>
-					<li><a href="/tech">טכנאים</a></li>
-					<li><a href="#not-implemented">שנה סיסמא</a></li>
-				</ul>
-			</nav>
+			<div>
+				<nav class="hamburger" tabindex="1">
+					<ul>
+						<li><a href="/test">בדיקות</a></li>
+						<li><a href="/item">פריטים</a></li>
+						<li><a href="/measure">מכשירי מדידה</a></li>
+						<li><a href="/tech">טכנאים</a></li>
+						<li><a href="#not-implemented">שנה סיסמא</a></li>
+						<li><a href="/logout">התנתק</a></li>
+					</ul>
+				</nav>
+			</div>
 		</header>
 		<section>{% block content %}{% endblock %}</section>
 		<footer>{% block footer %}{% endblock %}</footer>
