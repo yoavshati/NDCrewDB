@@ -21,20 +21,25 @@
 			</div>
 			<div style="text-align: center">
 				{% if user.is_authenticated %}
-				<p>שלום, {{ user }}</p>
+				<p>שלום, <a href="{% url 'profile' user.id %}">{{ user }}</a></p>
 				{% else %}
-				<span><a href="/login">היכנס לאתר</a></span>
+				<a href="/login">היכנס לאתר</a>
 				{% endif %}
 			</div>
 			<div>
 				<nav class="hamburger" tabindex="1">
 					<ul>
+						{% if user.is_authenticated %}
 						<li><a href="/test">בדיקות</a></li>
 						<li><a href="/item">פריטים</a></li>
 						<li><a href="/measure">מכשירי מדידה</a></li>
 						<li><a href="/tech">טכנאים</a></li>
-						<li><a href="/change-password">שנה סיסמא</a></li>
+						<li><a href="/profile">דף משתמש</a></li>
+						<li><a href="{% url 'change-password' user.id %}">שנה סיסמא</a></li>
 						<li><a href="/logout">התנתק</a></li>
+						{% else %}
+						<li><a href="/login">התחבר</a></li>
+						{% endif %}
 					</ul>
 				</nav>
 			</div>

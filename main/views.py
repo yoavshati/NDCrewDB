@@ -20,7 +20,7 @@ class TestListView(ListView):
 def test_list(request):
     items = TestItem.objects.all()
     item_filter = ItemFilter(request.GET, queryset = items)
-    test_list = Test.objects.filter(id__in=item_filter.qs.distinct().values_list('id', flat = True))
+    test_list = Test.objects.filter(id__in=item_filter.qs.values_list('test', flat = True)).distinct()
     test_filter = TestFilter(request.GET, queryset = test_list)
     test_list = test_filter.qs
     return render(request, 'main/test_list.html', {
@@ -103,10 +103,10 @@ def tech_list(request):
         technicians = technicians.filter(department = request.user.department)
     return render(request, 'main/technician_list.html', {'object_list': technicians})
 
-def tech_detail(request, id):
+def user_detail(request, id):
     tech = User.objects.get(id=id)
     context = {'tech': tech}
-    return render(request, '', context)
+    return render(request, 'main/profile.html', context)
 
 def user_register(request):
     form = UserForm(request.POST or None)
@@ -117,12 +117,18 @@ def user_register(request):
         elif 'add_more' in request.POST:
             return HttpResponseRedirect('/tech/new')
     return render(request, 'main/user_form.html', {'form': form})
+    
+class UserUpdateView(UpdateView):
+    success_url = '/tech/'
+    model = User
+    fields = '__all__'
+    exclude = ['password']
 
 @login_required
-def change_password(request):
+def change_password(request, id):
     form = PasswordForm(request.POST or None)
     if form.is_valid():
-        user = request.user
+        user = User.objects.get(id=id)
         user.set_password(form.cleaned_data['new_password'])
         user.save()
         return HttpResponseRedirect('/')

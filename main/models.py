@@ -61,9 +61,6 @@ class Test(models.Model):
         related_query_name = "checker",
         verbose_name = 'בודק'
     )
-    
-    def __str__(self):
-        return str(self.tester) + ', ' + str(self.test_date)
 
 # saves item types for automatic field filling
 class ReferenceItem(models.Model):
@@ -91,6 +88,3 @@ class TestItem(models.Model):
     test_method = models.IntegerField(choices = TEST_METHOD, verbose_name = 'שיטת בדיקה')
     literature_code = models.CharField(max_length = 50, verbose_name = 'שיוך לספרות טכנית')
     testing_hours = models.FloatField(verbose_name = 'שעתון בדיקה')
-
-    def __str__(self):
-        return self.part_description

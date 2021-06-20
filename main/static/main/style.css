@@ -28,9 +28,6 @@ select {
 	width: 100%;
 	padding: 0;
 }
-span {
-	font-size: 1.5rem;
-}
 a {
 	text-decoration: none;
 	color: var(--text-color);
@@ -48,9 +45,6 @@ button {
 	color: var(--text-color);
 	font-size: 1.5rem;
 	cursor: pointer;
-}
-p {
-	margin: 0.5em;
 }
 h2 {
 	margin-bottom: 1rem;
@@ -88,7 +82,7 @@ body {
 	margin: 0;
 }
 header {
-	height: 10vh;
+	height: minmax(10vh, max-content);
 	z-index: 1;
 	color: var(--text-color);
 	background-color: var(--main-color);
@@ -97,6 +91,7 @@ header {
 }
 header > div {
 	flex: 1;
+	height: 100%;
 	font-size: 1.5rem;
 	background: var(--main-color);
 	position: relative;
@@ -145,11 +140,12 @@ section::-webkit-scrollbar {
 }
 .hamburger {
 	width: 6rem;
-	height: 10vh;
+	height: 100%;
 	margin-right: auto;
 	position: relative;
 	outline-offset: -0.5rem;
 }
+/* nav dropdown */
 .hamburger ul {
 	background: var(--main-color);
 	position: absolute;
@@ -157,6 +153,7 @@ section::-webkit-scrollbar {
 	left: 0;
 	width: max-content;
 	padding: 0;
+	border-radius: 0 0 1rem 0;
 	z-index: -1;
 	transition: transform 250ms;
 }
