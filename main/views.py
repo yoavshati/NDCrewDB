@@ -101,7 +101,7 @@ def tech_list(request):
     # filter again so supervisors can only see their own technicians
     if request.user.groups.name == 'מ"ע':
         technicians = technicians.filter(department = request.user.department)
-    return render(request, 'main/technician_list.html', {'object_list': technicians})
+    return render(request, 'main/user_list.html', {'object_list': technicians})
 
 def user_detail(request, id):
     technician = User.objects.get(id=id)
