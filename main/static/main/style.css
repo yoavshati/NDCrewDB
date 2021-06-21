@@ -68,7 +68,7 @@ p {
 .text-center {
 	display: flex;
 	justify-content: center;
-	align-buttons: center;
+	align-items: center;
 }
 .fixed {
 	position: fixed;
@@ -100,7 +100,7 @@ header {
 	color: var(--text-color);
 	background-color: var(--main-color);
 	display: flex;
-	align-buttons: center;
+	align-items: center;
 }
 header > div {
 	flex: 1;
