@@ -96,7 +96,7 @@ class ItemListView(ListView):
     model = ReferenceItem
 
 # USER
-def tech_list(request):
+def technician_list(request):
     technicians = User.objects.filter(groups__name = 'טכנאי')
     # filter again so supervisors can only see their own technicians
     if request.user.groups.name == 'מ"ע':
@@ -106,7 +106,7 @@ def tech_list(request):
 def user_detail(request, id):
     technician = User.objects.get(id=id)
     tests = technician.tested.all()
-    context = {'tech': technician}
+    context = {'technician': technician}
     methods = [
         'PT',
         'MT',
@@ -131,26 +131,30 @@ def user_register(request):
     if form.is_valid():
         form.save()
         if 'save' in request.POST:
-            return HttpResponseRedirect('/tech')
+            return HttpResponseRedirect('/technician')
         elif 'add_more' in request.POST:
-            return HttpResponseRedirect('/tech/new')
+            return HttpResponseRedirect('/technician/new')
     return render(request, 'main/user_form.html', {'form': form})
     
 class UserUpdateView(UpdateView):
-    success_url = '/tech/'
+    success_url = '/technician/'
     model = User
     fields = '__all__'
     exclude = ['password']
+    def get_context_data(self, **kwargs):
+        context = super(UserUpdateView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
 
 @login_required
 def change_password(request, id):
     form = PasswordForm(request.POST or None)
+    user = User.objects.get(id=id)
     if form.is_valid():
-        user = User.objects.get(id=id)
         user.set_password(form.cleaned_data['new_password'])
         user.save()
         return HttpResponseRedirect('/')
-    return render(request, 'main/change_password.html', {'form': form})
+    return render(request, 'main/change_password.html', {'form': form, 'technician': user})
 
 ###########
 #   API   #

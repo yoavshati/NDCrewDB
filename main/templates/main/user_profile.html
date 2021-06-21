@@ -1,19 +1,28 @@
 {% extends "main/base.html" %} {% block content %}
 <div class="container">
 	<div style="flex: 1">
-		<h2>{{ tech }}</h2>
+		<h2>{{ technician }}</h2>
 		<table class="center card">
 			<tr>
 				<th>מ"א</th>
-				<td>{{ tech.username }}</td>
+				<td>{{ technician.username }}</td>
 			</tr>
 			<tr>
 				<th>שיוך ארגוני</th>
-				<td>{{ tech.get_department_display }}</td>
+				<td>{{ technician.get_department_display }}</td>
 			</tr>
 			<tr>
 				<th>הרשאה</th>
-				<td>{{ tech.groups }}</td>
+				<td>{{ technician.groups }}</td>
+			</tr>
+			<tr>
+				<th>שנה סיסמא</th>
+				<td>
+					<a
+						href="{% url 'change-password' technician.id %}"
+						class="update-button"
+					></a>
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -47,27 +56,27 @@
 				</tr>
 				<tr>
 					<th>PT</th>
-					<td>{{ tech.get_PT_level_display }}</td>
+					<td>{{ technician.get_PT_level_display }}</td>
 					<th>MT</th>
-					<td>{{ tech.get_MT_level_display }}</td>
+					<td>{{ technician.get_MT_level_display }}</td>
 					<th>EC</th>
-					<td>{{ tech.get_EC_level_display }}</td>
+					<td>{{ technician.get_EC_level_display }}</td>
 					<th>UT</th>
-					<td>{{ tech.get_UT_level_display }}</td>
+					<td>{{ technician.get_UT_level_display }}</td>
 					<th>RT</th>
-					<td>{{ tech.get_RT_level_display }}</td>
+					<td>{{ technician.get_RT_level_display }}</td>
 				</tr>
 				<tr>
 					<th>ראיה</th>
-					<td>{{ tech.get_visual_level_display }}</td>
+					<td>{{ technician.get_visual_level_display }}</td>
 					<th>הקשה</th>
-					<td>{{ tech.get_tap_level_display }}</td>
+					<td>{{ technician.get_tap_level_display }}</td>
 					<th>PAUT</th>
-					<td>{{ tech.get_PAUT_level_display }}</td>
+					<td>{{ technician.get_PAUT_level_display }}</td>
 					<th>LST</th>
-					<td>{{ tech.get_LST_level_display }}</td>
+					<td>{{ technician.get_LST_level_display }}</td>
 					<th>IRT</th>
-					<td>{{ tech.get_IRT_level_display }}</td>
+					<td>{{ technician.get_IRT_level_display }}</td>
 				</tr>
 			</tbody>
 		</table>

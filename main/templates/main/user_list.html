@@ -4,6 +4,7 @@
 		<tr>
 			<th colspan="2">שם מלא</th>
 			<th rowspan="2" colspan="10">רמת הסמכה</th>
+			<th rowspan="2"></th>
 		</tr>
 		<tr>
 			<th>שיוך ארגוני</th>
@@ -11,33 +12,40 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for tech in object_list %}
+		{% for technician in object_list %}
 		<tr>
-			<td colspan="2">{{ tech }}</td>
+			<td colspan="2">{{ technician }}</td>
 			<th>PT</th>
-			<td>{{ tech.get_PT_level_display }}</td>
+			<td>{{ technician.get_PT_level_display }}</td>
 			<th>MT</th>
-			<td>{{ tech.get_MT_level_display }}</td>
+			<td>{{ technician.get_MT_level_display }}</td>
 			<th>EC</th>
-			<td>{{ tech.get_EC_level_display }}</td>
+			<td>{{ technician.get_EC_level_display }}</td>
 			<th>UT</th>
-			<td>{{ tech.get_UT_level_display }}</td>
+			<td>{{ technician.get_UT_level_display }}</td>
 			<th>RT</th>
-			<td>{{ tech.get_RT_level_display }}</td>
+			<td>{{ technician.get_RT_level_display }}</td>
+			<td rowspan="2">
+				<a
+					href="{% url 'technician-update' technician.id %}"
+					class="update-button"
+				></a>
+				<a href="{% url 'profile' technician.id %}" class="list-button"></a>
+			</td>
 		</tr>
 		<tr>
-			<td>{{ tech.get_department_display }}</td>
-			<td>{{ tech.username }}</td>
+			<td>{{ technician.get_department_display }}</td>
+			<td>{{ technician.username }}</td>
 			<th>ראיה</th>
-			<td>{{ tech.get_visual_level_display }}</td>
+			<td>{{ technician.get_visual_level_display }}</td>
 			<th>הקשה</th>
-			<td>{{ tech.get_tap_level_display }}</td>
+			<td>{{ technician.get_tap_level_display }}</td>
 			<th>PAUT</th>
-			<td>{{ tech.get_PAUT_level_display }}</td>
+			<td>{{ technician.get_PAUT_level_display }}</td>
 			<th>LST</th>
-			<td>{{ tech.get_LST_level_display }}</td>
+			<td>{{ technician.get_LST_level_display }}</td>
 			<th>IRT</th>
-			<td>{{ tech.get_IRT_level_display }}</td>
+			<td>{{ technician.get_IRT_level_display }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
