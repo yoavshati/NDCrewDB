@@ -19,7 +19,7 @@
 			<div>
 				<a href="/" tabindex="-1"><strong>מערך אל-הרס</strong></a>
 			</div>
-			<div style="text-align: center">
+			<div class="text-center vert-center">
 				{% if user.is_authenticated %}
 				<p>שלום, <a href="{% url 'profile' user.id %}">{{ user }}</a></p>
 				{% else %}
