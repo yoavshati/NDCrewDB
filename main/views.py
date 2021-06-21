@@ -104,9 +104,28 @@ def tech_list(request):
     return render(request, 'main/technician_list.html', {'object_list': technicians})
 
 def user_detail(request, id):
-    tech = User.objects.get(id=id)
-    context = {'tech': tech}
-    return render(request, 'main/profile.html', context)
+    technician = User.objects.get(id=id)
+    tests = technician.tested.all()
+    context = {'tech': technician}
+    methods = [
+        'PT',
+        'MT',
+        'EC',
+        'UT',
+        'RT',
+        'visual',
+        'tap',
+        'PAUT',
+        'LST',
+        'IRT'
+    ]
+    for i in range(10):
+        print(i)
+        hours = 0
+        for test in tests:
+            hours += sum(test.items.filter(test_method = i+1).values_list('testing_hours', flat = True))
+        context[methods[i]] = hours
+    return render(request, 'main/user_profile.html', context)
 
 def user_register(request):
     form = UserForm(request.POST or None)

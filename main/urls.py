@@ -13,7 +13,7 @@ urlpatterns = [
     path('item/update/<int:pk>/', ItemUpdateView.as_view(), name = 'item-update'),
     path('item/delete/<int:pk>/', ItemDeleteView.as_view(), name = 'item-delete'),
     path('tech/', tech_list, name = 'tech-list'),
-    path('tech/<int:id>/', tech_list, name = 'profile'),
+    path('tech/<int:id>/', user_detail, name = 'profile'),
     path('tech/new/', user_register, name = 'tech-create'),
     path('tech/update/<int:pk>/', UserUpdateView.as_view(template_name = 'main/user_update.html'), name='tech-update'),
     path('change-password/<int:id>/', change_password, name = 'change-password'),

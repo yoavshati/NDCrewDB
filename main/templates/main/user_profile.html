@@ -1,0 +1,76 @@
+{% extends "main/base.html" %} {% block content %}
+<div class="container">
+	<div style="flex: 1">
+		<h2>{{ tech }}</h2>
+		<table class="center card">
+			<tr>
+				<th>מ"א</th>
+				<td>{{ tech.username }}</td>
+			</tr>
+			<tr>
+				<th>שיוך ארגוני</th>
+				<td>{{ tech.get_department_display }}</td>
+			</tr>
+			<tr>
+				<th>הרשאה</th>
+				<td>{{ tech.groups }}</td>
+			</tr>
+		</table>
+	</div>
+	<div style="flex: 2">
+		<h2>שעות בדיקה</h2>
+		<table class="content-table double-rows">
+			<tbody>
+				<tr>
+					<th>PT</th>
+					<td>{{ PT }}</td>
+					<th>MT</th>
+					<td>{{ MT }}</td>
+					<th>EC</th>
+					<td>{{ EC }}</td>
+					<th>UT</th>
+					<td>{{ UT }}</td>
+					<th>RT</th>
+					<td>{{ RT }}</td>
+				</tr>
+				<tr>
+					<th>ראיה</th>
+					<td>{{ visual }}</td>
+					<th>הקשה</th>
+					<td>{{ tap }}</td>
+					<th>PAUT</th>
+					<td>{{ PAUT }}</td>
+					<th>LST</th>
+					<td>{{ LST }}</td>
+					<th>IRT</th>
+					<td>{{ IRT }}</td>
+				</tr>
+				<tr>
+					<th>PT</th>
+					<td>{{ tech.get_PT_level_display }}</td>
+					<th>MT</th>
+					<td>{{ tech.get_MT_level_display }}</td>
+					<th>EC</th>
+					<td>{{ tech.get_EC_level_display }}</td>
+					<th>UT</th>
+					<td>{{ tech.get_UT_level_display }}</td>
+					<th>RT</th>
+					<td>{{ tech.get_RT_level_display }}</td>
+				</tr>
+				<tr>
+					<th>ראיה</th>
+					<td>{{ tech.get_visual_level_display }}</td>
+					<th>הקשה</th>
+					<td>{{ tech.get_tap_level_display }}</td>
+					<th>PAUT</th>
+					<td>{{ tech.get_PAUT_level_display }}</td>
+					<th>LST</th>
+					<td>{{ tech.get_LST_level_display }}</td>
+					<th>IRT</th>
+					<td>{{ tech.get_IRT_level_display }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}

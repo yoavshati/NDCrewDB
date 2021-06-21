@@ -50,15 +50,13 @@ class Test(models.Model):
         blank = True,
         null = True,
         on_delete = models.PROTECT,
-        related_name = "tester",
-        related_query_name = "tester",
+        related_name = "tested",
         verbose_name = 'מבצע'
     )
     checker = models.ForeignKey(
         User,
         on_delete = models.PROTECT,
-        related_name = "checker",
-        related_query_name = "checker",
+        related_name = "checked",
         verbose_name = 'בודק'
     )
 
