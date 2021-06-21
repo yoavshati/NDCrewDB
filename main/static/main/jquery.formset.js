@@ -245,8 +245,8 @@
 		formTemplate: null, // The jQuery selection cloned to generate new form instances
 		addText: "", // Text for the add link
 		deleteText: "", // Text for the delete link
-		addCssClass: "add-item", // CSS class applied to the add link
-		deleteCssClass: "delete-item", // CSS class applied to the delete link
+		addCssClass: "add-button", // CSS class applied to the add link
+		deleteCssClass: "delete-button", // CSS class applied to the delete link
 		formCssClass: "dynamic-form", // CSS class applied to each form in a formset
 		extraClasses: [], // Additional CSS classes, which will be applied to each form in turn
 		keepFieldValues: "", // jQuery selector for fields whose values should be kept when the form is cloned

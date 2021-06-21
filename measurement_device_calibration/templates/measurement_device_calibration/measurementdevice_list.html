@@ -22,11 +22,11 @@
 			<td>{{ measurement_device.expiration_date|date:"j/n/Y" }}</td>
 			<td>
 				<a
-					class="delete-item big"
+					class="delete-button big"
 					href="{% url 'md-delete' measurement_device.id %}"
 				></a>
 				<a
-					class="update-item big"
+					class="update-button big"
 					href="{% url 'md-update' measurement_device.id %}"
 				></a>
 			</td>

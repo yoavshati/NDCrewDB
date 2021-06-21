@@ -68,7 +68,7 @@ p {
 .text-center {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-buttons: center;
 }
 .fixed {
 	position: fixed;
@@ -100,7 +100,7 @@ header {
 	color: var(--text-color);
 	background-color: var(--main-color);
 	display: flex;
-	align-items: center;
+	align-buttons: center;
 }
 header > div {
 	flex: 1;
@@ -183,10 +183,6 @@ section::-webkit-scrollbar {
 	buttons
    ========= */
 
-.addbtn {
-	font-size: 4rem;
-	padding: 1.5rem;
-}
 .button {
 	padding: 0.6rem 0.8rem;
 	margin: 0.6rem;
@@ -195,9 +191,9 @@ section::-webkit-scrollbar {
 	padding: 0.3rem 0.5rem;
 	margin: 0;
 }
-.add-item,
-.update-item,
-.delete-item {
+.add-button,
+.update-button,
+.delete-button {
 	display: inline-block;
 	position: relative;
 	text-align: center;
@@ -208,15 +204,15 @@ section::-webkit-scrollbar {
 	border: none;
 	color: var(--text-color);
 }
-.add-item {
+.add-button {
 	font-size: 5rem;
 	margin-top: auto;
 	margin-bottom: auto;
 	margin-right: auto;
 	margin-left: auto;
 }
-.update-item,
-.delete-item {
+.update-button,
+.delete-button {
 	font-size: 1.5rem;
 }
 
@@ -224,10 +220,10 @@ section::-webkit-scrollbar {
 	ICONS
    ======= */
 
-.add-item::before,
-.add-item::after,
-.update-item::before,
-.delete-item::before {
+.add-button::before,
+.add-button::after,
+.update-button::before,
+.delete-button::before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -239,10 +235,10 @@ section::-webkit-scrollbar {
 	margin: auto;
 	background-color: var(--text-color);
 }
-.add-item::after {
+.add-button::after {
 	transform: rotate(90deg);
 }
-.update-item::before {
+.update-button::before {
 	width: 0.8em;
 	border-radius: 1px;
 	clip-path: polygon(
