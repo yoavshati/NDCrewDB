@@ -120,7 +120,6 @@ def user_detail(request, id):
         'IRT'
     ]
     for i in range(10):
-        print(i)
         hours = 0
         for test in tests:
             hours += sum(test.items.filter(test_method = i+1).values_list('testing_hours', flat = True))
