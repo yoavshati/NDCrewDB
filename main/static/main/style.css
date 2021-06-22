@@ -116,6 +116,13 @@ section::-webkit-scrollbar {
 .spacer {
 	height: 3rem;
 }
+.home {
+	display: flex;
+	padding: 2em;
+}
+.home-col {
+	flex: 1;
+}
 .search {
 	height: 70%;
 	width: 70%;
@@ -173,7 +180,12 @@ section::-webkit-scrollbar {
 /* =========
 	buttons
    ========= */
-
+.home .button {
+	display: block;
+	padding: 1.5em;
+	margin: 1em 1.5em;
+	border-radius: 1.5em;
+}
 button,
 .button {
 	padding: 0.5rem;

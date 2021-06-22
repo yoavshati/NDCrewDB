@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -11,12 +12,14 @@ from .filters import *
 #   views   #
 #############
 
+@login_required
 def home(request):
     return render(request, 'main/home.html')
 
-class TestListView(ListView):
+class TestListView(LoginRequiredMixin, ListView):
     model = Test
 
+@login_required
 def test_list(request):
     items = TestItem.objects.all()
     item_filter = ItemFilter(request.GET, queryset = items)
@@ -30,7 +33,7 @@ def test_list(request):
     })
 
 # creates test and related parts
-class TestCreateView(CreateView):
+class TestCreateView(LoginRequiredMixin, CreateView):
     template_name = 'main/test_form.html'
     model = Test
     form_class = TestForm
@@ -81,21 +84,22 @@ class TestCreateView(CreateView):
         return self.render_to_response(self.get_context_data(form=form,item_form=item_form))
 
 # REFERENCE ITEM
-class ItemCreateView(CreateView):
+class ItemCreateView(LoginRequiredMixin, CreateView):
     success_url = '/item/'
     model = ReferenceItem
     fields = '__all__'
-class ItemUpdateView(UpdateView):
+class ItemUpdateView(LoginRequiredMixin, UpdateView):
     success_url = '/item/'
     model = ReferenceItem
     fields = '__all__'
-class ItemDeleteView(DeleteView):
+class ItemDeleteView(LoginRequiredMixin, DeleteView):
     success_url = '/item/'
     model = ReferenceItem
-class ItemListView(ListView):
+class ItemListView(LoginRequiredMixin, ListView):
     model = ReferenceItem
 
 # USER
+@login_required
 def technician_list(request):
     technicians = User.objects.filter(groups__name = 'טכנאי')
     # filter again so supervisors can only see their own technicians
@@ -103,6 +107,7 @@ def technician_list(request):
         technicians = technicians.filter(department = request.user.department)
     return render(request, 'main/user_list.html', {'object_list': technicians})
 
+@login_required
 def user_detail(request, id):
     technician = User.objects.get(id=id)
     tests = technician.tested.all()
@@ -126,6 +131,10 @@ def user_detail(request, id):
         context[methods[i]] = hours
     return render(request, 'main/user_profile.html', context)
 
+def self_user_detail(request):
+    return user_detail(request, request.user.id)
+
+@login_required
 def user_register(request):
     form = UserForm(request.POST or None)
     if form.is_valid():
@@ -136,25 +145,27 @@ def user_register(request):
             return HttpResponseRedirect('/technician/new')
     return render(request, 'main/user_form.html', {'form': form})
     
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     success_url = '/technician/'
     model = User
     fields = '__all__'
-    exclude = ['password']
-    def get_context_data(self, **kwargs):
-        context = super(UserUpdateView, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(UserUpdateView, self).get_context_data(**kwargs)
+    #     context['user'] = self.request.user
+    #     return context
 
 @login_required
 def change_password(request, id):
     form = PasswordForm(request.POST or None)
-    user = User.objects.get(id=id)
     if form.is_valid():
-        user.set_password(form.cleaned_data['new_password'])
-        user.save()
+        user1 = User.objects.get(id=id)
+        user1.set_password(form.cleaned_data['new_password'])
+        user1.save()
         return HttpResponseRedirect('/')
-    return render(request, 'main/change_password.html', {'form': form, 'technician': user})
+    return render(request, 'main/change_password.html', {'form': form})
+
+def self_change_password(request):
+    return change_password(request, request.user.id)
 
 ###########
 #   API   #

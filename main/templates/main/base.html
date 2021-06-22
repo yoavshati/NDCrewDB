@@ -30,12 +30,15 @@
 				<nav class="hamburger" tabindex="1">
 					<ul>
 						{% if user.is_authenticated %}
+						<li><a href="/">מסך הבית</a></li>
+						{% if user.groups.name != "טכנאי" %}
 						<li><a href="/test">בדיקות</a></li>
 						<li><a href="/item">פריטים</a></li>
 						<li><a href="/measure">מכשירי מדידה</a></li>
 						<li><a href="/technician/">טכנאים</a></li>
-						<li><a href="{% url 'profile' user.id %}">דף משתמש</a></li>
-						<li><a href="{% url 'change-password' user.id %}">שנה סיסמא</a></li>
+						{% endif %}
+						<li><a href="{% url 'self-profile' %}">דף משתמש</a></li>
+						<li><a href="{% url 'self-change-password' %}">שנה סיסמא</a></li>
 						<li><a href="/logout">התנתק</a></li>
 						{% else %}
 						<li><a href="/login">התחבר</a></li>
